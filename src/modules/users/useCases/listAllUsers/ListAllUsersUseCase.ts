@@ -10,7 +10,6 @@ class ListAllUsersUseCase {
 
   execute({ user_id }: IRequest): User[] {
     const user = this.usersRepository.findById(user_id);
-
     const users = this.usersRepository.list();
 
     if (user.admin) {
