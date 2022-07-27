@@ -1,0 +1,113 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Atlas",
+    "description": "Essa é uma documentação sobre a Atlas API",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Gerenciamento de usuários"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Criar um novo usário",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "email": { "type": "string" }
+                },
+                "example": {
+                  "name": "Rocketseat",
+                  "email": "oi@rocketseat.com.br"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Novo usuário criado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "email": { "type": "string" },
+                    "id": { "type": "string" },
+                    "created_at": { "type": "Date" },
+                    "updated_at": { "type": "Date" },
+                    "admin": { "type": "boolean" }
+                  },
+                  "example": {
+                    "name": "Rocketseat",
+                    "email": "oi@rocketseat.com.br",
+                    "id": " 4de25f36-0c44-4b74-ae74-b3b66cb5bdfc",
+                    "created_at": "2022-07-25T21:47:25.125Z",
+                    "updated_at": "2022-07-25T21:47:25.125Z",
+                    "admin": false
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Email já está sendo utilizado"
+          },
+          "example": {
+            "error": "This email is already in use"
+          }
+        }
+      },
+      "get": {
+        "summary": "Retoma todos os usuários",
+        "description": "Somente usuários admin podem acessar",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "parameters": {
+                  "name": "string"
+                },
+                "example": {
+                  "name": "Rocketseat",
+                  "email": "testName@gmail.com.br"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "created new user",
+            "example": {
+              "id": " 4de25f36-0c44-4b74-ae74-b3b66cb5bdfc",
+              "admin": false,
+              "updated_at": "2022-07-25T21:47:25.125Z",
+              "created_at": "2022-07-25T21:47:25.125Z",
+              "name": "testName",
+              "email": "testName@gmail.com.br"
+            }
+          },
+          "400": {
+            "description": "Email já está sendo utilizado"
+          },
+          "example": {
+            "error": "This email is already in use"
+          }
+        }
+      }
+    }
+  }
+}
